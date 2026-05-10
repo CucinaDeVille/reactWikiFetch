@@ -33,9 +33,7 @@ export default function App() {
             placeholder="Wikipedia-Suche..."
         />
 
-        <div className="NiceOutput">
-            dangerouslySetInnerHTML={{ __html: output }}
-        </div>
+        <div className="NiceOutput" dangerouslySetInnerHTML={{ __html: output }}/>
       </div>
   );
 }
