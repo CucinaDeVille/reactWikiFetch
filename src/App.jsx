@@ -2,15 +2,17 @@ import { useState } from "react";
 import "./App.css";
 
 export default function App() {
-  const [text, setText] = useState("");
+    const [text, setText] = useState("");
+    const [output, setOutput] = useState("");
 
     async function fetchWiki(url) {
         const response = await fetch(url);
         const data = await response.json();
+
         const pages = data.query.pages;
         const page = Object.values(pages)[0];
 
-        console.log(page.extract);
+        setOutput(String(page.extract) || "Kein Ergebnis");
     }
 
     function handleChange(e) {
@@ -32,7 +34,7 @@ export default function App() {
         />
 
         <div className="NiceOutput">
-          In state: {text}
+            dangerouslySetInnerHTML={{ __html: output }}
         </div>
       </div>
   );
