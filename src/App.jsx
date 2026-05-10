@@ -12,7 +12,8 @@ export default function App() {
         const pages = data.query.pages;
         const page = Object.values(pages)[0];
 
-        setOutput(String(page.extract) || "Kein Ergebnis");
+        const extractText = page.extract ? page.extract : "Kein Ergebnis zur Suche";
+        setOutput(extractText);
     }
 
     function handleChange(e) {
