@@ -6,13 +6,22 @@ export default function App() {
     const [output, setOutput] = useState("");
 
     async function fetchWiki(url) {
-        const response = await fetch(url);
-        const data = await response.json();
+        try{
+            const response = await fetch(url);
+            const data = await response.json();
 
-        const page = Object.values(data.query.pages)[0];
-
-        const extractText = page.extract ? page.extract : "Kein Ergebnis zur Suche";
-        setOutput(extractText);
+            const pages = data.query.pages;
+            if (!pages) {
+                setOutput("Kein Ergebnis");
+                return;
+            }
+            const page = Object.values(pages)[0];
+            const extractText = page.extract ? page.extract : "Kein Ergebnis zur Suche";
+            setOutput(extractText);
+        }
+        catch(err){
+            setOutput("Fehler bei der Anfrage: " + err);
+        }
     }
 
     async function handleChange(e) {
