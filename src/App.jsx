@@ -9,8 +9,7 @@ export default function App() {
         const response = await fetch(url);
         const data = await response.json();
 
-        const pages = data.query.pages;
-        const page = Object.values(pages)[0];
+        const page = Object.values(data.query.pages)[0];
 
         const extractText = page.extract ? page.extract : "Kein Ergebnis zur Suche";
         setOutput(extractText);
