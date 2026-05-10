@@ -27,6 +27,13 @@ export default function App() {
     async function handleChange(e) {
         const value = e.target.value;
         setText(value);
+
+        // no input by user yet/ user clears input
+        if (value.trim() === "") {
+            setOutput("");
+            return;
+        }
+
         const url =
             `https://de.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&format=json&titles=${value}`;
         await fetchWiki(url);
