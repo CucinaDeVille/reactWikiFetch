@@ -2,32 +2,32 @@ import {useState} from "react";
 
 export default function useFetch() {
 
-    // variable to store response in
+    // store the fetched response data
     const [data, setData] = useState(null);
 
-    // variable to store potential error in
+    // store possible request errors
     const [error, setError] = useState(null);
 
-    // variable to store whether loading or not
+    // indicates whether the request is currently loading
     const [loading, setLoading] = useState(false);
 
     async function fetchData(url) {
 
-        setLoading(true);
-        setError(null);
+        setLoading(true); // request starts -> loading set to true
+        setError(null); // reset previous errors
 
         try{
-            const response = await fetch(url); // send out request to given url
-            const json = await response.json(); // convert into json
-            setData(json);
+            const response = await fetch(url); // send request out to given url
+            const json = await response.json(); // convert response into json
+            setData(json); // store response into state of variable
         }
         catch(err){
-            setError(err); // catch potential error in request
+            setError(err); // catch error/ store message in state of respective variable
         }
         finally {
-            setLoading(false); // change back to initial state - false
+            setLoading(false); // request finished -> loading set to false
         }
     }
 
-    return [data, setData, error, loading, fetchData]; // provide calling component with toolset
+    return [data, setData, error, loading, fetchData]; // expose states of variables and fetch function to other components
 }
