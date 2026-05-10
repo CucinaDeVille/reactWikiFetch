@@ -15,12 +15,12 @@ export default function App() {
         setOutput(extractText);
     }
 
-    function handleChange(e) {
+    async function handleChange(e) {
         const value = e.target.value;
         setText(value);
         const url =
             `https://de.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&format=json&titles=${value}`;
-        fetchWiki(url);
+        await fetchWiki(url);
     }
 
   return (
